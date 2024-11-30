@@ -1,0 +1,29 @@
+services:
+
+  webapp:
+    container_name: webapp-con
+    image: bookstoreapi
+    ports:
+      - "80:80"
+    networks:
+      - books-net
+    depends_on:
+      - database
+    restart: always
+
+  database:
+    container_name: mysql-con
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: Pp123456
+      MYSQL_DATABASE: bookstore_db
+      MYSQL_USER: clarusway
+      MYSQL_PASSWORD: Clarusway_1
+    networks:
+      - books-net
+    volumes:
+      - books-vol:/var/lib/mysql
+networks:
+  books-net:
+volumes:
+  books-vol:
